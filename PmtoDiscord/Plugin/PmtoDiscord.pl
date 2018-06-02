@@ -8,7 +8,7 @@
 #
 # Use at your own risk.
 #
-# This plugin should be in a subfolder of plugins like 'plugins/Chattodiscord/Chattodiscord.pl'.
+# This plugin should be in a subfolder of plugins like 'plugins/PmtoDiscord/PmtoDiscord.pl'.
 #
 ############################
 
@@ -17,7 +17,7 @@ package PmtoDiscord;
 use strict;
 use Plugins;
 use Globals;
-use Commands;
+
 use LWP::UserAgent;
 
 
