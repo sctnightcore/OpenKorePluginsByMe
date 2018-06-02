@@ -49,5 +49,5 @@ sub receivedPM {
 	$req->header('content-type' => 'application/json');
 	$req->content($json);
 	$ua->request($req);
-
+}
 1;
