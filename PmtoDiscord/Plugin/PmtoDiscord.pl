@@ -4,11 +4,7 @@
 # This software is open source, licensed under the GNU General Public
 # License, version 2.
 #
-# Configuration:
-# 
-# Whenever the bot recives a PM, it will forward to all masters listed
-# Do not place too many masters, or you might be disconnected for too
-# many packets or get muted :P
+# Whenever the bot recives a PM, it will forward to Discord
 #
 # Use at your own risk.
 #
@@ -34,7 +30,7 @@ my $hooks = Plugins::addHooks(
 sub onUnload {
     Plugins::delHooks($hooks);
 }
-
+#TODO : optimized Code ! 
 sub receivedPM {
     my ($self, $args, $user, $msg, $ua, $url, $json, $req) = @_;
 	#openkore
