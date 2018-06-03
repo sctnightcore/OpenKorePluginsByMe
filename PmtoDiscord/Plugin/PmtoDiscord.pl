@@ -32,18 +32,16 @@ sub onUnload {
 }
 #TODO : optimized Code ! 
 sub receivedPM {
-    my ($self, $args, $user, $msg, $ua, $url, $json, $req) = @_;
+    my ($self, $args, $user, $msg) = @_;
 	#openkore
 	$user = $args->{privMsgUser};
 	$msg = $args->{privMsg};
 	#wehhook setting
-	$ua = LWP::UserAgent->new;
-	$ua->agent('Mozilla/5.0'); 
-	$url = 'https://discordapp.com/api/webhooks/452478667252039680/Lqb0i4-cKm9_OClAtZI-ETFeK2BHYecZXBijggSWchjwzJlFxK820jTo_WISibWoqBBD';
-	$json = '{"username":"[PmToDiscord]","content":"'.[$user].':'.$msg.'"}';
-	$req = HTTP::Request->new(POST=>$url);
-	$req->header('content-type' => 'application/json');
-	$req->content($json);
-	$ua->request($req);
+	LWP::UserAgent->new->post(
+	'https://discordapp.com/api/webhooks/452478667252039680/Lqb0i4-cKm9_OClAtZI-ETFeK2BHYecZXBijggSWchjwzJlFxK820jTo_WISibWoqBBD',
+	'Content-Type' => 'application/json',
+	'User-Agent' => 'Mozilla/4.0',
+	'Content' => '{"username":"[PmToDiscord]","content":"['.$user.']:'.$msg.'"}',
+	);
 }
 1;
