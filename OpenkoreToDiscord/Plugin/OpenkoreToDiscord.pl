@@ -1,15 +1,11 @@
 ############################
-# forwardPms plugin for OpenKore by thefallen
-#
+# Openkore -> Discord[Webhook]  plugin for OpenKore by sctnightcore & alisonrag
 # This software is open source, licensed under the GNU General Public
 # License, version 2.
-#
 # Whenever the bot recives , it will forward to Discord
-#
 # Use at your own risk.
-#
 # This plugin should be in a subfolder of plugins like 'plugins/OpenkoreToDiscord/OpenkoreToDiscord.pl'.
-#
+# 
 ############################
 
 package OpenkoreToDiscord;
