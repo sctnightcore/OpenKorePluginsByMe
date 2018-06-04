@@ -38,34 +38,36 @@ sub onUnload {
     Plugins::delHooks($hooks);
 }
 
+
 sub receivedPM {
 	my ($self, $args, $user, $msg) = @_;
 	my $MESSAGE = ('```[ChatLog]' .$args->{privMsgUser}.':'.$args->{privMsg}.'```');	
 	discordnotifier($MESSAGE);
 }
 
+
 sub disconnected {
-	my $MESSAGE = ('```[Notifier]Openkore Status Changed to: DISCONNECTED```');
+	my $MESSAGE = ('```[Notifier]: Openkore Status Changed to: DISCONNECTED```');
 	debug "Send self_died To Discord!\n";
 	discordnotifier($MESSAGE);
 }
 	
 sub self_died {
-	my $MESSAGE = ('```[Notifier]'.$char->{name}.' DIED in '.$field->name.'```');
+	my $MESSAGE = ('```[Notifier]: '.$char->{name}.' DIED in '.$field->name.'```');
 	debug "Send self_died To Discord!\n";
 	discordnotifier($MESSAGE);
 }
 
 sub base_level_changed {
 	my ($self, $args) = @_;
-	my $MESSAGE = ('```[Notifier]'.$char->{name}.' is now in base level '.$args->{level}.'```');
+	my $MESSAGE = ('```[Notifier]: '.$char->{name}.' is now in base level '.$args->{level}.'```');
 	debug "Send base_level_changed To Discord!\n";
 	discordnotifier($MESSAGE);
 }
 
 sub job_level_changed {
 	my ($self, $args) = @_;
-	my $MESSAGE = ('```[Notifier]'.$char->{name}.' is now in job level '.$args->{level}.'```');
+	my $MESSAGE = ('```[Notifier]: '.$char->{name}.' is now in job level '.$args->{level}.'```');
 	debug "Send job_level_changed To Discord!\n";
 	discordnotifier($MESSAGE);
 }
@@ -73,7 +75,7 @@ sub job_level_changed {
 sub map_changed {
 	my ($self, $args) = @_;
 	return unless ($field->name ne $args->{oldMap});
-	my $MESSAGE = ('```[Notifier]'.$char->{name}.' changed map from: '.$args->{oldMap} . ' to: ' . $field->name. '```');
+	my $MESSAGE = ('```[Notifier]: '.$char->{name}.' changed map from: '.$args->{oldMap} . ' to: ' . $field->name. '```');
 	debug "Send map_changed To Discord!\n";
 	discordnotifier($MESSAGE);
 }
