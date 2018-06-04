@@ -4,7 +4,7 @@
 # License, version 2.
 # Whenever the bot recives , it will forward to Discord
 # Use at your own risk.
-# This plugin should be in a subfolder of plugins like 'plugins/OpenkoreToDiscord/OpenkoreToDiscord.pl'.
+# This plugin should be in a subfolder of plugins like 'plugins/OpenkoreToLineNotify/OpenkoreToLineNotify.pl'.
 # 
 ############################
 
