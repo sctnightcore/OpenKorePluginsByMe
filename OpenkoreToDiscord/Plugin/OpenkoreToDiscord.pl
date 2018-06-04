@@ -40,27 +40,27 @@ sub onUnload {
 
 
 sub disconnected {
-	my $MESSAGE = ('```[DiscordNotifier]Openkore Status Changed to: DISCONNECTED```');
+	my $MESSAGE = ('```[Notifier]Openkore Status Changed to: DISCONNECTED```');
 	debug "Send self_died To Discord!\n";
 	discordnotifier($MESSAGE);
 }
 	
 sub self_died {
-	my $MESSAGE = ('```[DiscordNotifier]'.$char->{name}.' DIED in '.$field->name.'```');
+	my $MESSAGE = ('```[Notifier]'.$char->{name}.' DIED in '.$field->name.'```');
 	debug "Send self_died To Discord!\n";
 	discordnotifier($MESSAGE);
 }
 
 sub base_level_changed {
 	my ($self, $args) = @_;
-	my $MESSAGE = ('```[DiscordNotifier]'.$char->{name}.' is now in base level '.$args->{level}.'```');
+	my $MESSAGE = ('```[Notifier]'.$char->{name}.' is now in base level '.$args->{level}.'```');
 	debug "Send base_level_changed To Discord!\n";
 	discordnotifier($MESSAGE);
 }
 
 sub job_level_changed {
 	my ($self, $args) = @_;
-	my $MESSAGE = ('```[DiscordNotifier]'.$char->{name}.' is now in job level '.$args->{level}.'```');
+	my $MESSAGE = ('```[Notifier]'.$char->{name}.' is now in job level '.$args->{level}.'```');
 	debug "Send job_level_changed To Discord!\n";
 	discordnotifier($MESSAGE);
 }
@@ -68,7 +68,7 @@ sub job_level_changed {
 sub map_changed {
 	my ($self, $args) = @_;
 	return unless ($field->name ne $args->{oldMap});
-	my $MESSAGE = ('```[DiscordNotifier]'.$char->{name}.' changed map from: '.$args->{oldMap} . ' to: ' . $field->name. '```');
+	my $MESSAGE = ('```[Notifier]'.$char->{name}.' changed map from: '.$args->{oldMap} . ' to: ' . $field->name. '```');
 	debug "Send map_changed To Discord!\n";
 	discordnotifier($MESSAGE);
 }
@@ -77,7 +77,7 @@ sub map_changed {
 
 sub discordnotifier {
 	my ($MESSAGE) = @_;
-	my %content = ('username' => 'OpenKore', 'content' => $MESSAGE);
+	my %content = ('username' => '[OpenKore]', 'content' => $MESSAGE);
 	my $json = encode_json(\%content);
 	require LWP::UserAgent;
 	LWP::UserAgent->new->post(
