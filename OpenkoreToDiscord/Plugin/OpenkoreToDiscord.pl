@@ -41,7 +41,7 @@ sub onUnload {
 
 sub receivedPM {
 	my ($self, $args, $user, $msg) = @_;
-	my $MESSAGE = ('```[ChatLog]' .$args->{privMsgUser}.':'.$args->{privMsg}.'```');	
+	my $MESSAGE = ('```[ChatLog] '.$args->{privMsgUser}.':'.$args->{privMsg}.'```');	
 	discordnotifier($MESSAGE);
 }
 
