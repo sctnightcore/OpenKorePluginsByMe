@@ -38,6 +38,11 @@ sub onUnload {
     Plugins::delHooks($hooks);
 }
 
+sub receivedPM {
+	my ($self, $args, $user, $msg) = @_;
+	my $MESSAGE = ('```[ChatLog]' .$args->{privMsgUser}.':'.$args->{privMsg}.'```');	
+	discordnotifier($MESSAGE);
+}
 
 sub disconnected {
 	my $MESSAGE = ('```[Notifier]Openkore Status Changed to: DISCONNECTED```');
