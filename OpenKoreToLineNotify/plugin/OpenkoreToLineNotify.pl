@@ -90,7 +90,7 @@ sub LineNotify {
 	LWP::UserAgent->new->post(
 	'https://notify-api.line.me/api/notify', 
 	 { message => $MESSAGE},
-	 Authorization => 'Bearer T448peBdbuAMmJxIRx4wpQOB9tLtG0A3VgoDh1V7sLi',
+	 Authorization => 'Bearer ',
 	);
 }
 
