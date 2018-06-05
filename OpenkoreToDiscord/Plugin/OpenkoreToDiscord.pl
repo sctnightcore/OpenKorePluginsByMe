@@ -12,15 +12,12 @@ package OpenkoreToDiscord;
 
 use strict;
 use Plugins;
+use Utils qw( existsInList getFormattedDate timeOut makeIP compactArray calcPosition distance);
+use Time::HiRes qw(time);
 use Log qw(warning message error debug);
-use JSON::Tiny qw(encode_json);
-use LWP::UserAgent;
 use I18N qw(bytesToString);
 use Globals;
 use Misc;
-use Time::HiRes qw(time);
-use Utils qw( existsInList getFormattedDate timeOut makeIP compactArray calcPosition distance);
-use Translation;
 
 Plugins::register('OpenkoreToDiscord', 'Forwards received to Discord.', \&onUnload);
 
@@ -43,8 +40,8 @@ sub receivedPM {
 	my $msg;
 	my $time = getFormattedDate(time);
 	$msg .= "```================ [Openkore ChatLog] ===============\n";
-	$msg .= ("Time :".$time."\n"),
-	$msg .= ("FROM :[".$args->{privMsgUser}."] : ".$args->{privMsg}."\n"),
+	$msg .= "Time :".$time."\n",
+	$msg .= "FROM :[".$args->{privMsgUser}."] : ".$args->{privMsg}."\n",
 	$msg .= "====================================================```\n";
 	discordnotifier($msg);
 }
@@ -52,7 +49,7 @@ sub receivedPM {
 
 sub disconnected {
 	my $time = getFormattedDate(time);
-	my $msg = ("```OpenKore Status : Disconnect [".$time."]```\n"),
+	my $msg = "```OpenKore Status : Disconnect [".$time."]```\n",
 	debug "Send disconnected To Discord!\n";
 	discordnotifier($msg);
 }
@@ -61,7 +58,7 @@ sub self_died {
 	my $msg;
 	my $time = getFormattedDate(time);
 	$msg .= "```================ [Openkore Notifier] ===============\n";
-	$msg .= ("Time :".$time."\n"),
+	$msg .= "Time :".$time."\n",
 	$msg .= "Name: ".$char->{name}." \n",
 	$msg .= "Status :".$char->{dead}."\n",
 	$msg .= "Map: ".$field->name."\n",
@@ -75,7 +72,7 @@ sub base_level_changed {
 	my ($self, $args) = @_;
 	my $time = getFormattedDate(time);
 	$msg .= "```================ [Openkore Notifier] ===============\n";
-	$msg .= ("Time :".$time."\n"),
+	$msg .= "Time :".$time."\n",
 	$msg .= "Name : ".$char->{name}."\n",
 	$msg .= "LvUP! : ".$args->{level}."\n",
 	$msg .= "====================================================```\n";
@@ -88,7 +85,7 @@ sub job_level_changed {
 	my ($self, $args) = @_;
 	my $time = getFormattedDate(time);
 	$msg .= "```================ [Openkore Notifier] ===============\n";
-	$msg .= ("Time :".$time."\n"),
+	$msg .= "Time :".$time."\n",
 	$msg .= "Name: ".$char->{name}."\n",
 	$msg .= "JobLvUP! : ".$args->{level}."\n",
 	$msg .= "====================================================```\n";
@@ -101,7 +98,7 @@ sub map_changed {
 	my $time = getFormattedDate(time);
 	return unless ($field->name ne $args->{oldMap});
 	$msg .= "```================ [Openkore Notifier] ===============\n";
-	$msg .= ("Time :".$time."\n"),
+	$msg .= "Time :".$time."\n",
 	$msg .= "Name: ".$char->{name}."\n",
 	$msg .= "OldMap : ".$args->{oldMap}."\n",
 	$msg .= "NewMap : ".$field->name."\n",		
@@ -114,7 +111,7 @@ sub map_changed {
 
 sub discordnotifier {
 	my ($msg) = @_;
-	my %content = ('username' => '[OpenKore]', 'content' => $msg);
+	my %content = ('username' => '[OpenKore-Bot]', 'content' => $msg);
 	my $json = encode_json(\%content);
 	require LWP::UserAgent;
 	LWP::UserAgent->new->post(
@@ -124,4 +121,5 @@ sub discordnotifier {
 	'Content' => $json,
 	);
 }
+
 1;
