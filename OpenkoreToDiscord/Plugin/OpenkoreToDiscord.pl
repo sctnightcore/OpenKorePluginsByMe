@@ -16,6 +16,7 @@ use encoding 'utf8';
 use Utils qw( existsInList getFormattedDate timeOut makeIP compactArray calcPosition distance);
 use Time::HiRes qw(time);
 use Log qw(warning message error debug);
+use JSON::Tiny qw(encode_json);
 use I18N qw(bytesToString);
 use Globals;
 use Misc;
