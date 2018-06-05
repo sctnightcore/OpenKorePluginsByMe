@@ -19,9 +19,8 @@ use I18N qw(bytesToString);
 use Globals;
 use Misc;
 use Time::HiRes qw(time);
+use Utils qw( existsInList getFormattedDate timeOut makeIP compactArray calcPosition distance);
 use Translation;
-
-
 
 Plugins::register('OpenkoreToDiscord', 'Forwards received to Discord.', \&onUnload);
 
@@ -41,43 +40,65 @@ sub onUnload {
 
 sub receivedPM {
 	my ($self, $args, $user, $msg) = @_;
-	my $MESSAGE = ('```[ChatLog] '.$args->{privMsgUser}.':'.$args->{privMsg}.'```');	
-	discordnotifier($MESSAGE);
+	my $msg;
+	my $time = getFormattedDate(time);
+	$msg .= "```================ [Openkore ChatLog] ===============\n";
+	$msg .= ("Time: ".$time."\n", );
+	$msg .= ("FROM :[".$args->{privMsgUser}."] : ".$args->{privMsg}."\n"),
+	$msg .= "=================================================```\n";
+	discordnotifier($msg);
 }
 
 
 sub disconnected {
-	my $MESSAGE = ('```[Notifier]: Openkore Status Changed to: DISCONNECTED```');
-	debug "Send self_died To Discord!\n";
-	discordnotifier($MESSAGE);
+	my $msg = "```OpenKore Status : Disconnect```";
+	debug "Send disconnected To Discord!\n";
+	discordnotifier($msg);
 }
 	
 sub self_died {
-	my $MESSAGE = ('```[Notifier]: '.$char->{name}.' DIED in '.$field->name.'```');
+	my $msg;
+	$msg .= "```================ [Openkore Notifier] ===============\n";
+	$msg .= "Name: ".$char->{name}." \n",
+	$msg .= "Status :".$char->{dead}."\n",
+	$msg .= "Map: ".$field->name."\n",
+	$msg .= "=================================================```\n";
 	debug "Send self_died To Discord!\n";
-	discordnotifier($MESSAGE);
+	discordnotifier($msg);
 }
 
 sub base_level_changed {
+	my $msg;
 	my ($self, $args) = @_;
-	my $MESSAGE = ('```[Notifier]: '.$char->{name}.' is now in base level '.$args->{level}.'```');
+	$msg .= "```================ [Openkore Notifier] ===============\n";
+	$msg .= "Name : ".$char->{name}."\n",
+	$msg .= "LvUP! : ".$args->{level}."\n",
+	$msg .= "=================================================```\n";
 	debug "Send base_level_changed To Discord!\n";
-	discordnotifier($MESSAGE);
+	discordnotifier($msg);
 }
 
 sub job_level_changed {
+	my $msg;
 	my ($self, $args) = @_;
-	my $MESSAGE = ('```[Notifier]: '.$char->{name}.' is now in job level '.$args->{level}.'```');
-	debug "Send job_level_changed To Discord!\n";
-	discordnotifier($MESSAGE);
+	$msg .= "```================ [Openkore Notifier] ===============\n";
+	$msg .= "Name: ".$char->{name}."\n",
+	$msg .= "JobLvUP! : ".$args->{level}."\n",
+	$msg .= "=================================================```\n";
+	discordnotifier($msg);
 }
 
 sub map_changed {
+	my $msg;
 	my ($self, $args) = @_;
 	return unless ($field->name ne $args->{oldMap});
-	my $MESSAGE = ('```[Notifier]: '.$char->{name}.' changed map from: '.$args->{oldMap} . ' to: ' . $field->name. '```');
+	$msg .= "```================ [Openkore Notifier] ===============\n";	
+	$msg .= "Name: ".$char->{name}."\n",
+	$msg .= "OldMap : ".$args->{oldMap}."\n",
+	$msg .= "NewMap : ".$field->name."\n",		
+	$msg .= "=================================================```\n";
 	debug "Send map_changed To Discord!\n";
-	discordnotifier($MESSAGE);
+	discordnotifier($msg);
 }
 
 
