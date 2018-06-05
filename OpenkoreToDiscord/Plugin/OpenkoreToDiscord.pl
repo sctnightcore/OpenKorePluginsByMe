@@ -104,8 +104,8 @@ sub map_changed {
 
 
 sub discordnotifier {
-	my ($MESSAGE) = @_;
-	my %content = ('username' => '[OpenKore]', 'content' => $MESSAGE);
+	my ($msg) = @_;
+	my %content = ('username' => '[OpenKore]', 'content' => $msg);
 	my $json = encode_json(\%content);
 	require LWP::UserAgent;
 	LWP::UserAgent->new->post(
