@@ -45,7 +45,7 @@ sub receivedPM {
 	$msg .= "```================ [Openkore ChatLog] ===============\n";
 	$msg .= ("Time: ".$time."\n", );
 	$msg .= ("FROM :[".$args->{privMsgUser}."] : ".$args->{privMsg}."\n"),
-	$msg .= "=================================================```\n";
+	$msg .= "====================================================```\n";
 	discordnotifier($msg);
 }
 
@@ -62,7 +62,7 @@ sub self_died {
 	$msg .= "Name: ".$char->{name}." \n",
 	$msg .= "Status :".$char->{dead}."\n",
 	$msg .= "Map: ".$field->name."\n",
-	$msg .= "=================================================```\n";
+	$msg .= "====================================================```\n";
 	debug "Send self_died To Discord!\n";
 	discordnotifier($msg);
 }
@@ -73,7 +73,7 @@ sub base_level_changed {
 	$msg .= "```================ [Openkore Notifier] ===============\n";
 	$msg .= "Name : ".$char->{name}."\n",
 	$msg .= "LvUP! : ".$args->{level}."\n",
-	$msg .= "=================================================```\n";
+	$msg .= "====================================================```\n";
 	debug "Send base_level_changed To Discord!\n";
 	discordnotifier($msg);
 }
@@ -84,7 +84,7 @@ sub job_level_changed {
 	$msg .= "```================ [Openkore Notifier] ===============\n";
 	$msg .= "Name: ".$char->{name}."\n",
 	$msg .= "JobLvUP! : ".$args->{level}."\n",
-	$msg .= "=================================================```\n";
+	$msg .= "====================================================```\n";
 	discordnotifier($msg);
 }
 
@@ -96,7 +96,7 @@ sub map_changed {
 	$msg .= "Name: ".$char->{name}."\n",
 	$msg .= "OldMap : ".$args->{oldMap}."\n",
 	$msg .= "NewMap : ".$field->name."\n",		
-	$msg .= "=================================================```\n";
+	$msg .= "====================================================```\n";
 	debug "Send map_changed To Discord!\n";
 	discordnotifier($msg);
 }
