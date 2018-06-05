@@ -59,7 +59,9 @@ sub disconnected {
 	
 sub self_died {
 	my $msg;
+	my $time = getFormattedDate(time);
 	$msg .= "```================ [Openkore Notifier] ===============\n";
+	$msg .= ("Time :".$time."\n"),
 	$msg .= "Name: ".$char->{name}." \n",
 	$msg .= "Status :".$char->{dead}."\n",
 	$msg .= "Map: ".$field->name."\n",
@@ -71,7 +73,9 @@ sub self_died {
 sub base_level_changed {
 	my $msg;
 	my ($self, $args) = @_;
+	my $time = getFormattedDate(time);
 	$msg .= "```================ [Openkore Notifier] ===============\n";
+	$msg .= ("Time :".$time."\n"),
 	$msg .= "Name : ".$char->{name}."\n",
 	$msg .= "LvUP! : ".$args->{level}."\n",
 	$msg .= "====================================================```\n";
@@ -82,7 +86,9 @@ sub base_level_changed {
 sub job_level_changed {
 	my $msg;
 	my ($self, $args) = @_;
+	my $time = getFormattedDate(time);
 	$msg .= "```================ [Openkore Notifier] ===============\n";
+	$msg .= ("Time :".$time."\n"),
 	$msg .= "Name: ".$char->{name}."\n",
 	$msg .= "JobLvUP! : ".$args->{level}."\n",
 	$msg .= "====================================================```\n";
@@ -92,8 +98,10 @@ sub job_level_changed {
 sub map_changed {
 	my $msg;
 	my ($self, $args) = @_;
+	my $time = getFormattedDate(time);
 	return unless ($field->name ne $args->{oldMap});
-	$msg .= "```================ [Openkore Notifier] ===============\n";	
+	$msg .= "```================ [Openkore Notifier] ===============\n";
+	$msg .= ("Time :".$time."\n"),
 	$msg .= "Name: ".$char->{name}."\n",
 	$msg .= "OldMap : ".$args->{oldMap}."\n",
 	$msg .= "NewMap : ".$field->name."\n",		
