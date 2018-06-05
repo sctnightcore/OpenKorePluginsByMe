@@ -43,7 +43,7 @@ sub receivedPM {
 	my $msg;
 	my $time = getFormattedDate(time);
 	$msg .= "```================ [Openkore ChatLog] ===============\n";
-	$msg .= ("Time: ".$time."\n", );
+	$msg .= ("Time :".$time."\n"),
 	$msg .= ("FROM :[".$args->{privMsgUser}."] : ".$args->{privMsg}."\n"),
 	$msg .= "====================================================```\n";
 	discordnotifier($msg);
@@ -51,7 +51,8 @@ sub receivedPM {
 
 
 sub disconnected {
-	my $msg = "```OpenKore Status : Disconnect```";
+	my $time = getFormattedDate(time);
+	my $msg = ("```OpenKore Status : Disconnect [".$time."]```\n"),
 	debug "Send disconnected To Discord!\n";
 	discordnotifier($msg);
 }
